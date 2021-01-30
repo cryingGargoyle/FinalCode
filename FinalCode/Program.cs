@@ -9,7 +9,6 @@ namespace FinalCode
         static Player player1;
         static void Main(string[] args)
         {
-            
             Greeting();
             CharacterSelection();
             FirstScene();
@@ -81,12 +80,43 @@ namespace FinalCode
             Console.WriteLine("\t\t\t\t[Character 1 : \"Mr. Robot\"]\t[Character 2 : \"Alice Wakefield\"]\t[Character 3 : \"The Bride\"]\n\n" + "\t\t\t\t-Quick hacking.\t\t\t-Seduction.\t\t\t\t-Taijutsu.\n" +
                 "\t\t\t\t-Lock-picking.\t\t\t-Lie detection.\t\t\t\t-Stealth.\n" + "\t\t\t\t-Blend in with the crowd.\t-Sharp vision.\t\t\t\t-Intimidation.\n\n");
 
-            if (UserOutput() == ConsoleKey.D1)
-                player1 = new Player(1); //picked Mr. Robot
-            else if (UserOutput() == ConsoleKey.D2)
-                player1 = new Player(2); //picked Alice W.
-            else if (UserOutput() == ConsoleKey.D3)
-                player1 = new Player(3); //picked The Bride
+            //modified a bit.
+            switch(UserOutput())
+            {
+                case ConsoleKey.D1:
+                    player1 = new Player(1); //picked Mr. Robot
+                    break;
+                case ConsoleKey.D2:
+                    player1 = new Player(2); //picked Alice W.
+                    break;
+                case ConsoleKey.D3:
+                    player1 = new Player(3); //picked The Bride
+                    break;
+                default:
+                    {
+                        bool wrongAnswer = true;
+                        ConsoleKey input;
+
+                        do
+                        {
+                            input = UserOutput();
+
+                            if (input == ConsoleKey.D1 || input == ConsoleKey.D2 || input == ConsoleKey.D3)
+                            {
+                                wrongAnswer = false;
+
+                                if(input == ConsoleKey.D1)
+                                    goto case ConsoleKey.D1;
+                                else if(input == ConsoleKey.D2)
+                                    goto case ConsoleKey.D2;
+                                else if(input == ConsoleKey.D3)
+                                    goto case ConsoleKey.D3;
+                            }
+
+                        } while (wrongAnswer);
+                    }
+                    break;
+            }    
 
             ForeColorsetter(ConsoleColor.Red);
             Console.WriteLine("\n\t\t\t\t\t\tNonetheless, no matter how insignificant one may be, everyone has a name. What’s yours?");
@@ -104,19 +134,33 @@ namespace FinalCode
         //done... I guess?
         public static void FirstScene()
         {
-            SetWinSize(231, 66);
+            SetWinSize(Console.LargestWindowWidth/2, Console.LargestWindowHeight);
             AllColorSetter(ConsoleColor.Black, ConsoleColor.DarkRed);
        
             //If booths part has been failed then player must return here and have the option of the dance floor only.
             if (!(player1.BoothsFail = false))
             {
 
-
                 Console.WriteLine("\n\n\t\tIn the midst of a pile of shit, the building of Club Giraffe is rising and\n" +
                 "\tit looks like a gleaming statue. Paramount and glamorous, the club is very popular\n" +
                 "\tamongst the rich and vapid. You are approaching the queue for the ones that\n" +
                 "\thave VIP tickets, so you won’t have to wait too long. You can observe the overly\n" +
-                "\texcited teenagers, the ones who are already wasted or high, and dope peddlers.\n\n");
+                "\texcited teenagers, the ones who are already wasted or high, and dope peddlers.\n\n\n\n");
+
+                ColoredString(ConsoleColor.DarkBlue,
+                                    "\t\t                             ^                                     \n" +
+                                    "\t\t                _______     ^^^                                    \n" +
+                                    "\t\t               |xxxxxxx|  _^^^^^_                                  \n" +
+                                    "\t\t               |xxxxxxx| | [][]  |                                 \n" +
+                                    "\t\t            ______xxxxx| |[][][] |                                 \n" +
+                                    "\t\t           |++++++|xxxx| | [][][]|                                 \n" +
+                                    "\t\t           |++++++|xxxx| |[][][] |                                 \n" +
+                                    "\t\t           |++++++|_________ [][]|                                 \n" +
+                                    "\t\t           |++++++|=|=|=|=|=| [] |                                 \n" +
+                                    "\t\t           |++++++|=|=|=|=|=|[][]|                                 \n" +
+                                    "\t\t___________|++HH++|  _HHHH__|   _________   _________  _________   \n" +
+                                    "\t\t         _______________   ______________      ______________      \n" +
+                                    "\t\t__________________  ___________    __________________    ____________ \n");
 
                 PressToContColored(ConsoleColor.Red);
 
@@ -129,9 +173,31 @@ namespace FinalCode
                               "\tfloor. There is an Industrial tune filling the atmosphere, you guess it’s Godhead. You\n" +
                               "\tnotice a huge bar with a seemingly zippy bartender attending to it. Other than\n" +
                               "\tthat, the dance floor is incredibly lively, after all it’s the most active hours of the\n" +
-                              "\tclub. What are you going to do?\n\n" + "\t\t" + "1. Go to the bar" + "\n" + "\t\t" + "2. Go to the dance floor" + "\n");
+                              "\tclub. What are you going to do?\n"); 
 
-            switch(UserOutput())
+            ColoredString(ConsoleColor.Red, "\n\n" +
+            "\t\t\t\t .======================================. \n" +
+            "\t\t\t\t |                                      | \n" +
+            "\t\t\t\t | |_| |_| \\_/ C|||C|||C||| |-| |-| |-| | \n" +
+            "\t\t\t\t | _|_ _|_ _|_  ||| ||| ||| |_| |_| |_| | \n" +
+            "\t\t\t\t '======================================. \n\n" +
+
+           " \t\t\t\t      .:.                               \n" +
+            "\t\t\t\t     C|||'                              \n" +
+            "\t\t\t\t   ___|||______________________________ \n" +
+            "\t\t\t\t  [____________________________________] \n" +
+            "\t\t\t\t  |   ____    ____    ____    ____     | \n" +
+            "\t\t\t\t  |  (____)  (____)  (____)  (____)    | \n " +
+            "\t\t\t\t  |  |    |  |    |  |    |  |    |    | \n" +
+            "\t\t\t\t  |  |    |  |    |  |    |  |    |    | \n" +
+            "\t\t\t\t  |  |    |  |    |  |    |  |    |    | \n" +
+            "\t\t\t\t  |  |____|  |____|  |____|  |____|    | \n" +
+            "\t\t\t\t  |  I====I  I====I  I====I  I====I    | \n" +
+            "\t\t\t\t  |  |    |  |    |  |    |  |    |    | \n\n\n");
+
+            Console.WriteLine("\t" + "1. Go to the bar" + "\n" + "\t" + "2. Go to the dance floor" + "\n");
+
+            switch (UserOutput())
             {
                 case ConsoleKey.D1:
                     TheBar();
@@ -146,10 +212,10 @@ namespace FinalCode
         //now it is clean... kinda... not sure... ._.
         public static void TheBar()
         {
-            AllColorSetter(ConsoleColor.Blue, ConsoleColor.Cyan);
+            AllColorSetter(ConsoleColor.Black, ConsoleColor.Cyan);
             
 
-            if(!(player1.BeenToBar = false))
+            if(!player1.BeenToBar)
             {
                 Console.WriteLine("\n\n\tFrom conventional bourbon fanatics to ones that are keen on trying out new\n" +
                                   "\tcocktails, the bar is completely stuffed. Luckily, you managed to find yourself a\n" +
@@ -157,10 +223,31 @@ namespace FinalCode
                                   "\t20’s with long braided hair, wearing baggy clothes. He has an English accent and\n" +
                                   "\tby the look of it you can say that he knows his business. He turns to you and\n" +
                                   "\tasks, ");
-                ColoredString(ConsoleColor.Yellow, "“Welcome to the Giraffe, what can I get you?”");
+                ColoredString(ConsoleColor.Yellow, "\t“Welcome to the Giraffe, what can I get you?”");
                 Console.WriteLine(" and he smiles.\n\n" + "\t1. Vodka.\n" +
                                                           "\t2. White Negroni.\n" +
                                                           "\t3. I don’t know, you choose.\n");
+
+                ColoredString(ConsoleColor.Yellow, "\n\n" +
+            "\t\t                            (            \n " +
+            "\t\t *                           )   *       \n" +
+            "\t\t             )     *        (            \n" +
+            "\t\t     )        (                   (      \n" +
+            "\t\t    (        )     (               )     \n" +
+            "\t\t     )    *         )        )    (      \n" +
+            "\t\t    (              (        (     *      \n" +
+            "\t\t     )          H   )        )           \n" +
+            "\t\t               [ ]          (            \n" +
+            "\t\t       (  *    |-|       *   )    (      \n" +
+            "\t\t *      )      |_|      .          )     \n" +
+            "\t\t       (       | |    .                  \n" +
+            "\t\t             (-----)      .    ' .  *    \n" +
+            "\t\t  (          |_____|  '  .    .          \n" +
+            "\t\t   )         | ___ |  \\~~~/  ' .     (  \n" +
+            "\t\t         *   | . . |   \\_/    \\~~~/  ) \n" +
+            "\t\t             | _Y_ |    |      \\_/   (  \n" +
+            "\t\t *           |-----|  __|__     |     *  \n" +
+            "\t\t             `-----`          __|__      \n\n");
 
                 switch (UserOutput())
                 {
@@ -189,6 +276,27 @@ namespace FinalCode
                                   "\tcouple of, presumably, freshmen are talking about the creeps among the crowd\n" +
                                   "\ton this floor and they are considering going upstairs. You also notice how the\n" +
                                   "\tbartender is looking exhausting right now, after non-stop serving for minutes.\n");
+
+            ColoredString(ConsoleColor.Yellow, "\n\n" +
+            "\t\t                            (            \n " +
+            "\t\t *                           )   *       \n" +
+            "\t\t             )     *        (            \n" +
+            "\t\t     )        (                   (      \n" +
+            "\t\t    (        )     (               )     \n" +
+            "\t\t     )    *         )        )    (      \n" +
+            "\t\t    (              (        (     *      \n" +
+            "\t\t     )          H   )        )           \n" +
+            "\t\t               [ ]          (            \n" +
+            "\t\t       (  *    |-|       *   )    (      \n" +
+            "\t\t *      )      |_|      .          )     \n" +
+            "\t\t       (       | |    .                  \n" +
+            "\t\t             (-----)      .    ' .  *    \n" +
+            "\t\t  (          |_____|  '  .    .          \n" +
+            "\t\t   )         | ___ |  \\~~~/  ' .     (  \n" +
+            "\t\t         *   | . . |   \\_/    \\~~~/  ) \n" +
+            "\t\t             | _Y_ |    |      \\_/   (  \n" +
+            "\t\t *           |-----|  __|__     |     *  \n" +
+            "\t\t             `-----`          __|__      \n\n");
 
             string option1 = "1. Jump to the conversation of the freshmen";
             string option2 = "2. Check in with the bartender";
@@ -391,7 +499,7 @@ namespace FinalCode
         //done... I guess?
         public static void HackFromBar()
         {
-            AllColorSetter(ConsoleColor.Blue, ConsoleColor.Cyan);
+            AllColorSetter(ConsoleColor.Black, ConsoleColor.Cyan);
 
             Console.WriteLine("\n\n\tIt took some time but you managed to hack the camera system. As\t\n" +
                               "\tyou surf around the camera views and observe the club more, you\n" +
@@ -514,7 +622,7 @@ namespace FinalCode
         //done... I guess?
         public static void Bartender()
         {
-            AllColorSetter(ConsoleColor.Blue, ConsoleColor.Cyan);
+            AllColorSetter(ConsoleColor.Black, ConsoleColor.Cyan);
 
             player1.LaurenceConversed = true;
 
@@ -652,7 +760,7 @@ namespace FinalCode
                             BartenderFailFrame();
                             break;
                         case ConsoleKey.D2:                           
-                                BartenderGossipBooths(!player1.BoothsFail); //this will be same with the mr. robot's version- neutral booths yes seduction-based no. (!player1.. because if player1.BoothsFail == true then )                         
+                            BartenderGossipBooths(!player1.BoothsFail); //this will be same with the mr. robot's version- neutral booths yes seduction-based no. (!player1.. because if player1.BoothsFail == true then )                         
                             break;
                         case ConsoleKey.D3: //only in this part third option is implemented.
                             {
@@ -751,15 +859,15 @@ namespace FinalCode
 
             Console.WriteLine("\n\n" +
                               "\t\t  ██████  ▒█████      ██▀███   █    ██ ▓█████▄ ▓█████\n" +
-                              "\t\t▒██    ▒ ▒██▒  ██▒   ▓██ ▒ ██▒ ██  ▓██▒▒██▀ ██▌▓█   ▀\n" +
-                              "\t\t░ ▓██▄   ▒██░  ██▒   ▓██ ░▄█ ▒▓██  ▒██░░██   █▌▒███  \n" +
-                              "\t\t  ▒   ██▒▒██   ██░   ▒██▀▀█▄  ▓▓█  ░██░░▓█▄   ▌▒▓█  ▄\n" +
+                              "\t\t▒██    ▒ ▒██▒  ██▒   ▓██ ▒ ██▒ ██  ▓██▒▒██▀ ██ ▓█   ▀\n" +
+                              "\t\t░ ▓██▄   ▒██░  ██▒   ▓██ ░▄█ ▒▓██  ▒██░░██   █ ▒███  \n" +
+                              "\t\t  ▒   ██▒▒██   ██░   ▒██▀▀█▄  ▓▓█  ░██░░▓█▄    ▒▓█  ▄\n" +
                               "\t\t▒██████▒▒░ ████▓▒░   ░██▓ ▒██▒▒▒█████▓ ░▒████▓ ░▒████▒\n" +
                               "\t\t▒ ▒▓▒ ▒ ░░ ▒░▒░▒░    ░ ▒▓ ░▒▓░░▒▓▒ ▒ ▒  ▒▒▓  ▒ ░░ ▒░ ░\n" +
                               "\t\t░ ░▒  ░ ░  ░ ▒ ▒░      ░▒ ░ ▒░░░▒░ ░ ░  ░ ▒  ▒  ░ ░  ░\n" +
                               "\t\t░  ░  ░  ░ ░ ░ ▒       ░░   ░  ░░░ ░ ░  ░ ░  ░    ░   \n" +
                               "\t\t      ░      ░ ░        ░        ░        ░       ░  ░\n\n");
-          
+
             Console.WriteLine("\tWhy such aggressiveness? You should be cooler than this! Now you feel the\n" +
                               "\tsecurity will be more careful with you.\n");
 
@@ -979,12 +1087,45 @@ namespace FinalCode
         //needs love
         public static void TheDanceFloor()
         {
-            AllColorSetter(ConsoleColor.DarkMagenta, ConsoleColor.Magenta);
+            AllColorSetter(ConsoleColor.Black, ConsoleColor.Magenta);
 
             Console.WriteLine("\n\n\tYou have been in nightclubs. Perhaps many, yet none of it felt quite like this\n" + 
                               "\tone. The ambience, majesty and depravity of this club is at the top and you can\n" +
                               "\tfeel it, in every single muscle and fiber of your body. As the bass from EDM\n" +
                               "\ttracks shakes the ground, you step towards the dance floor.\n");
+
+            ColoredString(ConsoleColor.DarkBlue, "\n\n" +
+            "\t\t   $$$$$$$$$$$$R$$$$$$$$$$$$$$$$$ \n" +
+            "\t\t   $$$$$$$V .Y...* *##%%$$$$$$$$$ \n" +
+            "\t\t   $$$$# `$$N$$$$$$$$$mmmuuu:...# \n" +
+            "\t\t   $$R    $$$$$$$$$$$$$$$$$$$$$$$ \n" +
+            "\t\t   $!   @$$$$$''R$$$$$$$$$$$$$$$$ \n" +
+            "\t\t   $>  '$$$$$F     $$$$$$$$$$$$$$ \n" +
+            "\t\t   $W   $$$$:     R$$$$$$$$$$$$$$ \n" +
+            "\t\t   $$     $$8$$R:x@$$$$$$$$$$$$$$ \n" +
+            "\t\t   $$$      $$$$x$$$$$$$$$$$$$$$$ \n" +
+            "\t\t   $$$     $N$ '$$$$$$$$$$$$$$$$$ \n" +
+            "\t\t   $$     $$$$ @  $$$$$$$$$$$$$$$ \n" +
+            "\t\t   $`   u$$$$$    R$$$$$$$$$$$$$$ \n" +
+            "\t\t      N$R$$$$      R$$$$$$$$$$$$$ \n " +
+            "\t\t     *$$@$$$f .i.   `$$$$$$$$$$$$ \n" +
+            "\t\t   k          9$$$.   $$$$$$$$$$$ \n" +
+            "\t\t   R          M$$$$$.   $$$$$$$$$ \n" +
+            "\t\t   $          4$$$$$$$.  $$$$$$$$ \n" +
+            "\t\t   $          $$$$$$$$$$b-B>R$$$$ \n" +
+            "\t\t   $          $$$$$$$$$$$$$$$$$$$ \n" +
+            "\t\t   $ <        $$$$$$$$$$$$$$$$$$$ \n" +
+            "\t\t   $ $b      $$$$$$$$$$$$$$$$$$$$ \n" +
+            "\t\t   $$$$i     $$$$$$$$$$$$$$$$$$$$ \n" +
+            "\t\t   $$$$$c    #$$$$$$$$$$$$$$$$$$$ \n" +
+            "\t\t   $$$$$R     ?$$$$$$$$$$$$$$$$$$ \n" +
+            "\t\t   $$$$$$      $$$$$$$$$$$$$$$$$$ \n" +
+            "\t\t   $$$$$$       $$$$$$$$$$$$$$$$$ \n" +
+            "\t\t   $$$$$$  .i.   #$$$$$$$$$$$$$$$ \n" +
+            "\t\t   $$$$$R  d$b    M$$$$$$$$$$$$$$ \n" +
+            "\t\t   $$$$$r  $$$$$$   9$$$$$$$$$$$$ \n" +
+            "\t\t   $$$$#  X$$$$$$$od$$$$$$$$$$$$$ \n" +
+            "\t\t   $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ \n\n");
 
             string option1 = "1. Look for a partner. [Sharp Vision]";
             string option2 = "2. You see an IT guy among the crowd. Go be a flatterer to him. [Intimidation]";
@@ -1220,7 +1361,7 @@ namespace FinalCode
                         Console.WriteLine("\n\n\tAs you approach the man, you start to see his face\n" +
                                           "\tmore clearly. Short, clean cut blonde hair, ice blue\n" +
                                           "\teyes with sharp features. He really is gorgeous.\n\n" + 
-                                          "\t\t1. Such beauties like you don't sit alone like that" +
+                                          "\t\t1. Such beauties like you don't sit alone like that\n" +
                                           "\t\toccasionally. Are you really alone? [Seduction]\n");
 
                         if(UserOutput() == ConsoleKey.D1)
@@ -1237,9 +1378,7 @@ namespace FinalCode
                                 Console.WriteLine("\tHe gets up and leads you to one of the private\n" + 
                                                   "\tbooths. As his strong arms wrap up your  body, you\n" +
                                                   "\tfeel a heat pulsing through your body.\n");
-
-                                if(UserOutput() == ConsoleKey.D1)
-                                {
+                                    //edited
                                     Console.WriteLine("\t\t1. You are hearing an argument, observe. [Sharp Vision]\n");
 
                                     if(UserOutput() == ConsoleKey.D1)
@@ -1253,8 +1392,7 @@ namespace FinalCode
                                             Booths();
 
                                     }
-                                }
-
+                               
                             }
                         }
 
@@ -1263,6 +1401,8 @@ namespace FinalCode
                 case ConsoleKey.D2:
                     {
                         //girls option
+
+                        player1.FreshmenConversed = true; //added pre-testing.
 
                         if(enableGirls)
                         {
@@ -1494,9 +1634,51 @@ namespace FinalCode
         //needs cleaning(needed update for ms. seduction)(update : modification done for ms. seduction)
         public static void Freshmen()
         {
-            AllColorSetter(ConsoleColor.Blue, ConsoleColor.Cyan);
+            AllColorSetter(ConsoleColor.Black, ConsoleColor.Cyan);
+            SetWinSize(Console.LargestWindowWidth, Console.LargestWindowHeight);
 
             player1.FreshmenConversed = true;
+
+            ColoredString(ConsoleColor.Yellow, 
+          "\n\n\t               _...._                   " + "\n" +
+          "\t           _.dMMMMMMMMMb.               " + "\n" +
+          "\t        ..dMMMMMMMMMMMMMMMb             " + "\n" +
+          "\t     .dMMMMMMMMMMMMMMMMMMMMb.           " + "\n" +
+          "\t    dMMMMMMMMMMMMMMMMMMMMMMMM.          " + "\n" +
+          "\t    MMMMMMMP'`YMMMMMMMMMMMMMMMb         " + "\n" +
+          "\t    MMMMMMP    MMMMMMMMMMMMMMMM         " + "\n" +
+          "\t   dMMMMMP     `MMMMMMMMMMMMMMMb        " + "\n" +
+          "\t   MMMMMM~=,,_  `MMMMMMMMMMMMMMM        " + "\n" +
+          "\t   MMMMMMP,6;    `MMMMMMMMMMMMMMb       " + "\n" +
+          "\t   MMMMMM|         ```^YMMMMMMMMM       " + "\n" +
+          "\t   MMMMMM:   -~        / |MMMMMMMb      " + "\n" +
+          "\t   `MMMMM/|  _.._     /  |MMMMMMMM      " + "\n" +
+          "\t     `YMM|_`.`~--'    |__|MMMMMMMM!     " + "                       .&dkl`,ivne._                                      \n" +
+          "\t       MMMMMM|       _.' _sS}MMMMMb     " + "                       sRfkgvc+rsnmGBND.                                  \n" +
+          "\t      `YMMMMMb.__.sP.---.  MMMMMMM      " + "                     aHBNLbni+.irumLGNMms                                 \n" +
+          "\t         ``YMMMMMMMP'        MMMMMb     " + "                     NRIr`'+dLKNMFb`'iNQr                                 \n" +
+          "\t             ``MMMd;          MMMMMM    " + "                    `ANWM7    `+lM0.  `'^Kl                               \n" +
+          "\t                 dP|          :MMMMMb.  " + "                    iNWL*_;=e.     Y._,_ ON                               \n" +
+          "\t            _.sP'             :MMMMMM   " + "                    aRNm   _.l,    j^ _` Bq,                              \n" +
+          "\t        _.s888P'   ,  .-. .-. |MMMMM}   " + "                    eNL:,l=N0`.   ls`N0> ibK                              \n" +
+          "\t     .s888888P    ,_|(  XoX  )|MMMM     " + "                    XHZu!       _(c      kPBN                             \n" +
+          "\t   .d88888888;     `| `-._.-' ;;M'      " + "                     'CD   .     `      tK7KX                             \n" +
+          "\t   8888888888|       :         :;,      " + "                       'f     _&zrc_.  .Y                                 \n" +
+          "\t   8888888888;       |         |`;,_    " + "  ,                        v,   `ta.=', V                                 \n" +
+          "\t   `Y88888888b     _,:         |;       " + " 7q. 6%                   ^l     =   .r                                   \n" +
+          "\t       `^Y88888ssssSP~':        ; SsP   " + " f'noib. +                `d+   .._a7                     t               \n" +
+          "\t           ''' |        |         ;     " + " k+RD6 L.dr                h'  `*+iPb                  .f adI`            \n" +
+          "\t                ;       |         |     " + " dj+Ggr 4NJb            .,dT     `'KJc                 _ir+4b .           \n" +
+          "\t                ;       ;         |     " + "   `cl^ ._ tk.   .,&;:rf't &; 'yIKbr;.              dp` luhrZti           \n" +
+          "\t              /      .'          |      " + "      `~.  ^_T `ysf'      ' n, 7     * lkr,.      i7k._m.JKiV'            \n" +
+          "\t             .'    .-'            ;     " + "         J  .H dY   `' -              ._``'VK,4=       .Kdj`              \n" +
+          "\t            /_...-'             .'|     " + "         K   K B               -s&.        eJ+      .ys7^'                \n" +
+          "\t           .'              _..-'   :    " + "         T   lLj                             (C'   .4                     \n" +
+          "\t          /         __.--''         :   " + "         P   'y    .,                      . +j    7                      \n\n\n\n");
+
+            PressToContColored(ConsoleColor.DarkYellow);
+
+            SetWinSize(Console.LargestWindowWidth/2, Console.LargestWindowHeight);
 
             Console.Write("\n\n\t“... right??? He is totally a loooooser! Anyways babe… Maybe we should check\n" +
                               "\tupstairs and see what’s u-”. The girl who was talking, who has long blonde hair,\n" +
@@ -1587,6 +1769,8 @@ namespace FinalCode
                                         ColoredString(ConsoleColor.Yellow, "\t“See, that’s how you become a creep.Piss off!” “Come\n" + "\ton love, we leaving” ");
                                         Console.Write("she whispered to the blonde.\n");
 
+                                        PressToContColored(ConsoleColor.Yellow);
+
                                         //you f ed up :c
                                         player1.FailCount++;
                                         player1.FreshmenFail = true;
@@ -1598,7 +1782,7 @@ namespace FinalCode
                                             AllColorSetter(ConsoleColor.White, ConsoleColor.Red);
 
                                             Console.WriteLine("\n\n\tYou should have behaved more accordingly… Now you feel the security will be\n" + "\tmore careful with you.\n\n");
-                                            PressToContColored(ConsoleColor.Black);
+                                            PressToContColored(ConsoleColor.Yellow);
                                             //returning to the bar, talking to freshmen is disabled now
                                             TheBar();
                                         }
@@ -1708,7 +1892,7 @@ namespace FinalCode
                                     break;
                                 case ConsoleKey.D3:
                                     {
-                                        AllColorSetter(ConsoleColor.Red, ConsoleColor.Black);
+                                        AllColorSetter(ConsoleColor.Black, ConsoleColor.DarkRed);
 
                                         Console.Write("\t*Erica turns to the blonde and they giggle to each other*, ");
                                         ColoredString(ConsoleColor.Magenta, "Oh, we most definitely will...\n");
@@ -1746,7 +1930,67 @@ namespace FinalCode
         //so far so good
         public static void Booths()
         {
-            AllColorSetter(ConsoleColor.Red, ConsoleColor.Black);
+            AllColorSetter(ConsoleColor.Black, ConsoleColor.DarkRed);
+
+            Console.WriteLine("\n\n" +
+           "\t                          .:, ______ ,        \n" +
+           "\t                         , ) ._       .       \n" +
+           "\t                          /,   )___    .      \n" +
+           "\t                     ___/ -.   _ - )    .     \n" +
+           "\t                     .    M;) /M) /`    (     \n" +
+           "\t                     /   |   _   (  _    )    \n" +
+           "\t                    ,     . (_)  , : )  /     \n" +
+           "\t                   (       .____    C| ;      \n" +
+           "\t                    .   __      .     ./                  \n" +
+           "\t                     )  )/       )     .,___ ___          \n" +
+           "\t                    /     ___ __;        _  X    .,       \n" +
+           "\t                   (    /.   X.         '  XV    ,.       \n" +
+           "\t                    . ./,     Xx          YXX.   :|:,,    \n" +
+           "\t                     .`|    _ XXXX.     ,XXXXA      |   , \n" +
+           "\t                   ., ./    /.ZXXXXZSxcSZXXXXSt     |.i   \n" +
+           "\t                :,..  /    /,,jSXXXXV’  'XXXSXf, |   |    \n" +
+           "\t               .:    ,    /    |             |i .,__- .,;;,:ittII+.   \n" +
+           "\t        .:+++iii,   /    _ __   +RBBBB( )WBBBR+  /   _ )      .;;iii. \n" +
+           "\t      ,;;,:ittII+,M(    .,   .   +RBBBBVBBBBBR+ |.   /     ::;t;;yii  \n" +
+           "\t   ::;t;;iii. .,:;;,+..,.|    .   VBBBBBBBBBBR+  | __|_.,;,    lfr.   \n" +
+           "\t  itVtIII :i;             .   ,|  XNBBBBRZRXBR(   /     ,     +x ,    \n" +
+           "\t +;;t:Yit  .,            _/__ /   WKBBBBRXZSRBRi        ,..,:::;.     \n" +
+           "\t     ..                     ./   AWNBBRSYEXYZXRa  \n" +
+           "\t                              .IMNSRXYZSRBBBBBRi  \n" +
+           "\t                              iMBSClXRNMMMMWNKRR. \n" +
+           "\t                              WMRZYSYRNMMMMWNBRYi \n" +
+           "\t                             lWMSZXYSKRNNMMMNBWS+ \n" +
+           "\t                             SWMRIOZRBNMMMMMMKBRi \n" +
+           "\t                             lWMXZCZNMMMMMMWNKSR+ \n" +
+           "\t                             iNUZYiSRNMMMMMMNUZR+ \n" +
+           "\t                             lBRYltRNWMMMMMMWNRX' \n" +
+           "\t                             'KXltxXBWMMMMMWNKBT  \n" +
+           "\t                              SZriZSNWMMMMMMNBSt  \n" +
+           "\t                               ltttttttthWKfttf   \n" +
+           "\t                               ittttttttWBtttt;   \n" +
+           "\t                               'ttttttttBStttl'   \n" +
+           "\t                                ZttttttYZttttf    \n" +
+           "\t                                 lStttttRftttv    \n" +
+           "\t                                 itSRNNYKtttt'    \n" +
+           "\t                                 tYSKRNEttttP     \n" +
+           "\t                                  StttSYZfttv     \n" +
+           "\t                                 .ftttlZXStY      \n" +
+           "\t                                 jttttttBKti      \n" +
+           "\t                                 StttttIWttt      \n" +
+           "\t                                 ZtttttYRtt'      \n" +
+           "\t                                 iSttttSttv       \n" +
+           "\t                                  lStttFty        \n" +
+           "\t                                   YtttZtt        \n" +
+           "\t                                    VttKtI        \n" +
+           "\t                                    VttNtE        \n" +
+           "\t                                   AtttWWIR       \n" +
+           "\t                                   kt:ttNRlR      \n" +
+           "\t                                  ZttttttBSlRi    \n" +
+           "\t                                  AtttttttXKZFti  \n" +
+           "\t                                    Vtttttttl     \n" +
+           "\t                                      `tttttti    \n\n");
+
+            PressToContColored(ConsoleColor.Red);
 
             Console.Write("\n\n\tFirst, the character of lights and colours has changed. From flashing neon lights\n" +
                               "\tand suffocating darkness, to static and embracing red and purple. As you go \n" +
@@ -1819,15 +2063,17 @@ namespace FinalCode
 
                                         AllColorSetter(ConsoleColor.White, ConsoleColor.Black);
 
-                                        Console.WriteLine("\t\t  ██████  ▒█████      ██▀███   █    ██ ▓█████▄ ▓█████\n" +
-                                                          "\t\t▒██    ▒ ▒██▒  ██▒   ▓██ ▒ ██▒ ██  ▓██▒▒██▀ ██▌▓█   ▀\n" +
-                                                          "\t\t░ ▓██▄   ▒██░  ██▒   ▓██ ░▄█ ▒▓██  ▒██░░██   █▌▒███  \n" +
-                                                          "\t\t  ▒   ██▒▒██   ██░   ▒██▀▀█▄  ▓▓█  ░██░░▓█▄   ▌▒▓█  ▄\n" +
-                                                          "\t\t▒██████▒▒░ ████▓▒░   ░██▓ ▒██▒▒▒█████▓ ░▒████▓ ░▒████▒\n" +
-                                                          "\t\t▒ ▒▓▒ ▒ ░░ ▒░▒░▒░    ░ ▒▓ ░▒▓░░▒▓▒ ▒ ▒  ▒▒▓  ▒ ░░ ▒░ ░\n" +
-                                                          "\t\t░ ░▒  ░ ░  ░ ▒ ▒░      ░▒ ░ ▒░░░▒░ ░ ░  ░ ▒  ▒  ░ ░  ░\n" +
-                                                          "\t\t░  ░  ░  ░ ░ ░ ▒       ░░   ░  ░░░ ░ ░  ░ ░  ░    ░   \n" +
-                                                          "\t\t      ░      ░ ░        ░        ░        ░       ░  ░\n\n\n");
+                                        //might need cleaning up
+                                        Console.WriteLine("\n\n" +
+                                                             "\t\t  ██████  ▒█████      ██▀███   █    ██ ▓█████▄ ▓█████\n" +
+                                                             "\t\t▒██    ▒ ▒██▒  ██▒   ▓██ ▒ ██▒ ██  ▓██▒▒██▀ ██ ▓█   ▀\n" +
+                                                             "\t\t░ ▓██▄   ▒██░  ██▒   ▓██ ░▄█ ▒▓██  ▒██░░██   █ ▒███  \n" +
+                                                             "\t\t  ▒   ██▒▒██   ██░   ▒██▀▀█▄  ▓▓█  ░██░░▓█▄    ▒▓█  ▄\n" +
+                                                             "\t\t▒██████▒▒░ ████▓▒░   ░██▓ ▒██▒▒▒█████▓ ░▒████▓ ░▒████▒\n" +
+                                                             "\t\t▒ ▒▓▒ ▒ ░░ ▒░▒░▒░    ░ ▒▓ ░▒▓░░▒▓▒ ▒ ▒  ▒▒▓  ▒ ░░ ▒░ ░\n" +
+                                                             "\t\t░ ░▒  ░ ░  ░ ▒ ▒░      ░▒ ░ ▒░░░▒░ ░ ░  ░ ▒  ▒  ░ ░  ░\n" +
+                                                             "\t\t░  ░  ░  ░ ░ ░ ▒       ░░   ░  ░░░ ░ ░  ░ ░  ░    ░   \n" +
+                                                             "\t\t      ░      ░ ░        ░        ░        ░       ░  ░\n\n");
 
                                         Console.WriteLine("\t\tNo. No no no. Just… Why did you think it is okay to say something like this to a \n" +
                                                           "\t\tperson, and better yet, an already troubled person?\n\n\n");
@@ -2062,6 +2308,36 @@ namespace FinalCode
         {
             AllColorSetter(ConsoleColor.Black, ConsoleColor.White);
 
+            Console.WriteLine("\n\n" +
+"\t             ________________________________________________   \n" +
+"\t            .                                                .  \n" +
+"\t           |    _________________________________________     | \n" +
+"\t           |   |                                         |    | \n" +
+"\t           |   |  C:\\> _                                 |    | \n" +
+"\t           |   |                                         |    | \n" +
+"\t           |   |                                         |    | \n" +
+"\t           |   |                                         |    | \n" +
+"\t           |   |                                         |    | \n" +
+"\t           |   |                                         |    | \n" +
+"\t           |   |                                         |    | \n" +
+"\t           |   |                                         |    | \n" +
+"\t           |   |                                         |    | \n" +
+"\t           |   |                                         |    | \n" +
+"\t           |   |                                         |    | \n" +
+"\t           |   |                                         |    | \n" +
+"\t           |   |_________________________________________|    | \n" +
+"\t           |                                                  | \n" +
+"\t            ._________________________________________________. \n" +
+"\t                   .___________________________________.        \n" +
+"\t                ___________________________________________     \n" +
+"\t             _-'    .-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.  --- `-_  \n" +
+"\t          _-'.-.-. .---.-.-.-.-.-.-.-.-.-.-.-.-.-.-.--.  .-.-.`-_ \n" +
+"\t       _-'.-.-.-. .---.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-`__`. .-.-.-.`-_  \n" +
+"\t    _-'.-.-.-.-. .-----.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-----. .-.-.-.-.`-_  \n" +
+"\t _-'.-.-.-.-.-. .---.-. .-------------------------. .-.---. .---.-.-.-.`-_  \n" +
+"\t:-------------------------------------------------------------------------:  \n" +
+"\t`---._.-------------------------------------------------------------._.---'  \n" );
+
             Console.WriteLine("\n\n\tYou would expect to find the main computer here also but no luck on that part.\n\n" +
                               "\t\t1. Try to locate the main computer through the surveillance system.\n");
 
@@ -2080,6 +2356,34 @@ namespace FinalCode
         {
             AllColorSetter(ConsoleColor.Gray, ConsoleColor.Black);
 
+            Console.WriteLine("\n\n" +
+            "\t\t                     dS$$S$S$S$S$S$S$$Sb                      \n" +
+            "\t\t                    :$$S^S$S$S$S$S$S^S$$;                     \n" +
+            "\t\t                    SSP   `^$S$S$^'   TSS                     \n" +
+            "\t\t                    $$       `^'       $$                     \n" +
+            "\t\t                   _SS ,-           -  SS_                    \n" +
+            "\t\t                  :-.|  _    - .-   _  |.-;                   \n" +
+            "\t\t                 :|(; ' ' -._.'._.-' ` |)|;                   \n" +
+            "\t\t                  | `|  , o       o .  |'                     \n" +
+            "\t\t                    ^:     -'   `-     :^                     \n" +
+            "\t\t                      :.              :                       \n" +
+            "\t\t                      : `    ._.    ' :                       \n" +
+            "\t\t                    .sSb   ._____.   dSs.                     \n" +
+            "\t\t                 _.d8dSSb.   ._.   .SSbT8b._                  \n" +
+            "\t\t            _.oOPd88SSSS T.       .P SSSS888OOo.              \n" +
+            "\t\t        _.mMMOOPd888SSSSb TSqqqSP dSSSS88OMOOOMMm._           \n" +
+            "\t\t     .oOMMMOMOOM8O8OSSSSSb TSSSP dSSSSS8OOMMOOMMOOOo._        \n" +
+            "\t\t .OOMMOOOMMOOMOOOOOO' ^ SSSTSSP dSSS ^  'OOOOMMOOMMMOOMMb.    \n" +
+            "\t\t dOOOMMMOMMOOOMOOOOO    ' ^ SSSS ^ '    :OOO8MMMOOMMOOMMOMMb  \n" +
+            "\t\t MMMMOOMMOMMOOMMO8OSP         `P        O8OPdMMOOMMOMMOMMMMMM \n" +
+            "\t\t MMMMOOMMMMMOOMbTO8SS:                 :8888MMMMMOMMOMMOMMMMM \n" +
+            "\t\t OOMMMMOOMMMMOOOMMOOOS:       S       :O8OPdMOMMMOMOMMOOMMMMO \n" +
+            "\t\t OOMMMMOOMMOMMOOMbTObTTb.     S     .dOPdMOOMMMMMOMMOMMMMMOOO \n" +
+            "\t\t MOOMMMMOMMOMMOOMMMOObTSSg._.SSS._.PdOPdMOOMMMMOMMMMOMMMMOOMM \n" +
+            "\t\t MMMOMMMMOMMMOMMOOMMbT8bTSSSSSSSSSPd8OPdOOOMMMMOOMMMMOMMMOOMM \n" +
+            "\t\t MMMOMMMOMMMMMOMMOOMMMbT8bTSSSSSPd88PdOOOOMMMMOOMMMMMMMMOOMMM \n\n");
+
+
             Console.WriteLine("\n\nThe dancer guided you about finding him and you followed her guidance. You\t\n" +
                              "\tfound the Bug on the 3rd floor and as soon as you found him, you realized he is\n" +
                              "\talso the “Technology Manager” of the club, not your usual security guard.\n" +
@@ -2090,7 +2394,7 @@ namespace FinalCode
             if(player1.getSelectedChar().containsSkill(Skills.Stealth)) //stealth
             {
                 Console.Write("\t\t1. Go sneaky. [Stealth]\n"); //selectable
-                ColoredString(ConsoleColor.Cyan, "\t\t2. Go directly and assertively. [Seduction]\n" +
+                ColoredString(ConsoleColor.Red, "\t\t2. Go directly and assertively. [Seduction]\n" +
                                                  "\t\t3. Mess with his phone from distance. [Quick hacking]\n"); //non-selectable
 
                 switch(UserOutput())
@@ -2150,9 +2454,9 @@ namespace FinalCode
             }
             else if(player1.getSelectedChar().containsSkill(Skills.Seduction)) //seduction
             {
-                ColoredString(ConsoleColor.Cyan, "\t\t1. Go sneaky. [Stealth]\n"); //non-selectable
+                ColoredString(ConsoleColor.Red, "\t\t1. Go sneaky. [Stealth]\n"); //non-selectable
                 Console.WriteLine("\t\t2. Go directly and assertively. [Seduction]"); //selectable
-                ColoredString(ConsoleColor.Cyan, "\t\t3. Mess with his phone from distance. [Quick hacking]\n\n"); //non-selectable
+                ColoredString(ConsoleColor.Red, "\t\t3. Mess with his phone from distance. [Quick hacking]\n\n"); //non-selectable
 
                 switch(UserOutput())
                 {
@@ -2175,15 +2479,15 @@ namespace FinalCode
                         break;
                     case ConsoleKey.D2:
                         {
-                            if(UserOutput() == ConsoleKey.D1)
-                            {
+                            //if(UserOutput() == ConsoleKey.D1) //why was this here?
+                            
 
                                 Console.WriteLine("\tYou are well aware that your words are sharper than any blade, so\n" +
                                                   "\tyou just barged into the office and greeted with a puzzling look.\n\n" + "\t\t1. So, you are the one who sexually harasses a well-renowned\n" +
                                                   "\tdancer? You really are in deep shit “Bug”.\n");
 
                                 Console.Write("\t*He reaches for his handgun and points it to you* ");
-                                ColoredString(ConsoleColor.Cyan, "Who\n" + "\tare you? Get the fuck out or I’ll blow your brains up!\n\n");
+                                ColoredString(ConsoleColor.Blue, "Who\n" + "\tare you? Get the fuck out or I’ll blow your brains up!\n\n");
 
                                 Console.WriteLine("\t\t1. Wow, you really are stupid as shit. Imagine what happens if\n" +
                                                  "\t you shot a person, who just caught your misbehaviour, in the\n" +
@@ -2195,7 +2499,7 @@ namespace FinalCode
                                     Console.Clear();
 
                                     Console.Write("\n\n\t*He panics, puts down the gun and asks* ");
-                                    ColoredString(ConsoleColor.Cyan, "At least\n" + "\ttell me who you are.\n\n");
+                                    ColoredString(ConsoleColor.Blue, "At least\n" + "\ttell me who you are.\n\n");
                                     Console.WriteLine("\t\t1. None of your concern. Now, go and tell that lady\n" +
                                                         "\t that you are incredibly sorry, or this will go public.\n");
 
@@ -2211,7 +2515,7 @@ namespace FinalCode
 
                                 }
 
-                            }
+                            
 
                         }
                         break;
@@ -2238,7 +2542,7 @@ namespace FinalCode
             }
             else if(player1.getSelectedChar().containsSkill(Skills.QuickHacking)) //quickHacking
             {
-                ColoredString(ConsoleColor.Cyan, "\t\t1. Go sneaky. [Stealth]\n" + "\t\t2. Go directly and assertively. [Seduction]\n"); //non-selectable
+                ColoredString(ConsoleColor.Red, "\t\t1. Go sneaky. [Stealth]\n" + "\t\t2. Go directly and assertively. [Seduction]\n"); //non-selectable
                 Console.WriteLine("\t\t3. Mess with his phone from distance. [Quick hacking]\n"); //selectable
 
                 switch(UserOutput())
@@ -2308,7 +2612,7 @@ namespace FinalCode
         //done
         public static void CrocodileThirdFloor()
         {
-            AllColorSetter(ConsoleColor.DarkGreen, ConsoleColor.Green);
+            AllColorSetter(ConsoleColor.Black, ConsoleColor.Green);
 
             Console.Write("\n\n\t\tMain floor’s audience mostly consists of corporate and mafia people, having fun.\n" +
                               "\tThat’s why there is an upper floor. To provide a more comfortable environment\n" +
@@ -2427,7 +2731,15 @@ namespace FinalCode
             {
                 Console.Write("\n\t\tYou wake up on a bench in a laboratory. A man with an expensive\n" +"\tsuit nods. ");
                 ColoredString(ConsoleColor.Yellow, "“Provide equipment. I want this job to be done. Tonight.”\n" + " “Yes, sir!”");
-                Console.WriteLine("They approved.\n");
+                Console.WriteLine("They approved.\n\n");
+
+                ColoredString(ConsoleColor.Green, 
+"\t   )\\.-.      /`-.    )\\   )\\   )\\.---.          .-./(       .-.   )\\.---.     /`-.  \n" +
+"\t ,' ,-,_)   ,' _  \\  (  ',/ /  (   ,-._(       ,'     )  ,'  /  ) (   ,-._(  ,' _  \\ \n" +
+"\t(  .   __  (  '-' (   )    (    \\  '-,        (  .-, (  (  ) | (   \\  '-,   (  '-' ( \n" +
+"\t ) '._\\ _)  )   _  ) (  \\(\\ \\    ) ,-`         ) '._\\ )  ) './ /    ) ,-`    ) ,_ .' \n" +
+"\t(  ,   (   (  ,' ) \\  `.) /  )  (  ``-.       (  ,   (  (  ,  (    (  ``-.  (  ' ) \\ \n" +
+"\t )/'._.'    )/    )/      '.(    )..-.(        )/ ._.'   )/..'      )..-.(   )/   )/ \n\n");
 
                 PressToEndColored(ConsoleColor.Yellow);
                 Environment.Exit(0);
@@ -2445,7 +2757,16 @@ namespace FinalCode
             if(UserOutput() == ConsoleKey.D1)
             {
                 ColoredString(ConsoleColor.Yellow, "\t“That was a good one. We better work on these dialogues though. What the\n" +
-                                                   "\thell was he doing MWAHAHAHAHA”");
+                                                   "\thell was he doing\n”");
+
+                ColoredString(ConsoleColor.Yellow,
+"\t ▄▀▀▄ ▄▀▄  ▄▀▀▄    ▄▀▀▄  ▄▀▀█▄   ▄▀▀▄ ▄▄   ▄▀▀█▄   ▄▀▀▄ ▄▄   ▄▀▀█▄   ▄▀▀▄ ▄▄   ▄▀▀█▄  \n" +
+"\t█  █ ▀  █ █   █    ▐  █ ▐ ▄▀ ▀▄ █  █   ▄▀ ▐ ▄▀ ▀▄ █  █   ▄▀ ▐ ▄▀ ▀▄ █  █   ▄▀ ▐ ▄▀ ▀▄  \n" +
+"\t▐  █    █ ▐  █        █   █▄▄▄█ ▐  █▄▄▄█    █▄▄▄█ ▐  █▄▄▄█    █▄▄▄█ ▐  █▄▄▄█    █▄▄▄█  \n" +
+"\t  █    █    █   ▄    █   ▄▀   █    █   █   ▄▀   █    █   █   ▄▀   █    █   █   ▄▀   █  \n" +
+"\t▄▀   ▄▀      ▀▄▀ ▀▄ ▄▀  █   ▄▀    ▄▀  ▄▀  █   ▄▀    ▄▀  ▄▀  █   ▄▀    ▄▀  ▄▀  █   ▄▀   \n" +
+"\t█    █             ▀    ▐   ▐    █   █    ▐   ▐    █   █    ▐   ▐    █   █    ▐   ▐    \n" +
+"\t▐    ▐                           ▐   ▐             ▐   ▐             ▐   ▐               \n\n" );
 
                 Console.Write("You wake up on a bench in a laboratory.\n" +
                               "\tSome men are laughing at something. Another man with an expensive\n" +
@@ -2467,12 +2788,20 @@ namespace FinalCode
                 //could need some editing.
                 AllColorSetter(ConsoleColor.White, ConsoleColor.DarkRed);
 
-                ColoredString(ConsoleColor.Black, "\t\t“Shit.This one is really a dumb one.Let’s just dispose of it.”");
+                ColoredString(ConsoleColor.Black, "\t\t“\n\nShit.This one is really a dumb one.Let’s just dispose of it.”");
                 Console.WriteLine(" You are in\n" +
                                  "\tdarkness and are unable to open your eyes. Your senses are going numb slowly. You\n" +
                                  "\tare, probably, dying.\n\n");
 
-                PressToEndColored(ConsoleColor.Red);
+                ColoredString(ConsoleColor.Red,
+"\t   )\\.-.      /`-.    )\\   )\\   )\\.---.          .-./(       .-.   )\\.---.     /`-.  \n" +
+"\t ,' ,-,_)   ,' _  \\  (  ',/ /  (   ,-._(       ,'     )  ,'  /  ) (   ,-._(  ,' _  \\ \n" +
+"\t(  .   __  (  '-' (   )    (    \\  '-,        (  .-, (  (  ) | (   \\  '-,   (  '-' ( \n" +
+"\t ) '._\\ _)  )   _  ) (  \\(\\ \\    ) ,-`         ) '._\\ )  ) './ /    ) ,-`    ) ,_ .' \n" +
+"\t(  ,   (   (  ,' ) \\  `.) /  )  (  ``-.       (  ,   (  (  ,  (    (  ``-.  (  ' ) \\ \n" +
+"\t )/'._.'    )/    )/      '.(    )..-.(        )/ ._.'   )/..'      )..-.(   )/   )/ \n");
+
+                PressToEndColored(ConsoleColor.DarkRed);
 
                 Environment.Exit(0);
 
@@ -2492,7 +2821,15 @@ namespace FinalCode
                               "\twalls and ground surrounding you, are starting to dissolve. You are endlessly\n" +
                               "\tfalling inside of a void.\n\n");
 
-            PressToEndColored(ConsoleColor.Red);
+            ColoredString(ConsoleColor.Red,
+"\t   )\\.-.      /`-.    )\\   )\\   )\\.---.          .-./(       .-.   )\\.---.     /`-.  \n" +
+"\t ,' ,-,_)   ,' _  \\  (  ',/ /  (   ,-._(       ,'     )  ,'  /  ) (   ,-._(  ,' _  \\ \n" +
+"\t(  .   __  (  '-' (   )    (    \\  '-,        (  .-, (  (  ) | (   \\  '-,   (  '-' ( \n" +
+"\t ) '._\\ _)  )   _  ) (  \\(\\ \\    ) ,-`         ) '._\\ )  ) './ /    ) ,-`    ) ,_ .' \n" +
+"\t(  ,   (   (  ,' ) \\  `.) /  )  (  ``-.       (  ,   (  (  ,  (    (  ``-.  (  ' ) \\ \n" +
+"\t )/'._.'    )/    )/      '.(    )..-.(        )/ ._.'   )/..'      )..-.(   )/   )/ \n");
+
+            PressToEndColored(ConsoleColor.DarkRed);
 
             Environment.Exit(0);
         }

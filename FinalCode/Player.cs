@@ -73,11 +73,11 @@ namespace FinalCode
         { 
             get
             {
-                return CompGuyFail;
+                return compGuyFail;
             }
             set
             {
-                CompGuyFail = value;
+                compGuyFail = value;
             }
         }
 
