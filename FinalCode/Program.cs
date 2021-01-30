@@ -7,8 +7,10 @@ namespace FinalCode
         //231 x 66
 
         static Player player1;
+        static bool playedOnce;
         static void Main(string[] args)
         {
+
             Greeting();
             CharacterSelection();
             FirstScene();
@@ -42,6 +44,10 @@ namespace FinalCode
         public static void CharacterSelection()
         {
             AllColorSetter(ConsoleColor.DarkMagenta, ConsoleColor.Black);
+
+            //initiates consequent loops.
+            if (playedOnce)
+                TryOthers();
 
             Console.WriteLine("\n\n" +
 "\t\t\t ▄████████    ▄█    █▄       ▄████████    ▄████████    ▄████████  ▄████████     ███        ▄████████    ▄████████    ▄████████" + "\n" +
@@ -129,6 +135,32 @@ namespace FinalCode
             Console.WriteLine("\n\t\t\t\t\t\t\t... ... .  ..Press any button to continue. . .. .   .");
             Console.ReadKey();
             Console.Clear();
+
+            //strenghtens the loop.
+            if (playedOnce)
+                FirstScene();
+        }
+
+        public static void TryOthers()
+        {
+            AllColorSetter(ConsoleColor.DarkMagenta, ConsoleColor.Black);
+            SetWinSize(160, 22);
+            Console.WriteLine("\n\n" +
+"\t\t    ███        ▄████████ ▄██   ▄              ▄██████▄      ███        ▄█    █▄       ▄████████    ▄████████    ▄████████\n" +
+"\t\t▀█████████▄   ███    ███ ███   ██▄           ███    ███ ▀█████████▄   ███    ███     ███    ███   ███    ███   ███    ███\n" +
+"\t\t   ▀███▀▀██   ███    ███ ███▄▄▄███           ███    ███    ▀███▀▀██   ███    ███     ███    █▀    ███    ███   ███    █▀ \n" +
+"\t\t    ███   ▀  ▄███▄▄▄▄██▀ ▀▀▀▀▀▀███           ███    ███     ███   ▀  ▄███▄▄▄▄███▄▄  ▄███▄▄▄      ▄███▄▄▄▄██▀   ███       \n" +
+"\t\t    ███     ▀▀███▀▀▀▀▀   ▄██   ███           ███    ███     ███     ▀▀███▀▀▀▀███▀  ▀▀███▀▀▀     ▀▀███▀▀▀▀▀   ▀███████████\n" +
+"\t\t    ███     ▀███████████ ███   ███           ███    ███     ███       ███    ███     ███    █▄  ▀███████████          ███\n" +
+"\t\t    ███       ███    ███ ███   ███           ███    ███     ███       ███    ███     ███    ███   ███    ███    ▄█    ███\n" +
+"\t\t   ▄████▀     ███    ███  ▀█████▀             ▀██████▀     ▄████▀     ███    █▀      ██████████   ███    ███  ▄████████▀ \n" +
+"\t\t              ███    ███                                                                          ███    ███             \n");
+
+
+            ColoredString(ConsoleColor.Red, "\t\t\t[This is not the end, there's more to unveil and see- try different options with different skill sets!]\n\n\t");
+            PressToContOut();
+            Console.Clear();
+            SetWinSize(185, 25);
         }
 
         //done... I guess?
@@ -466,7 +498,7 @@ namespace FinalCode
                 else if(player1.LaurenceConversed || player1.BartenderFail) //means that player1.bartenderFail == true; no bartender(or already have talked to)
                 {
                     Console.WriteLine("\t\t1" + option1.Substring(1) + "\n");
-                    ColoredString(ConsoleColor.Red, "\t\t" + option3 + "\n\n");
+                    ColoredString(ConsoleColor.Red, "\t\t2" + option3.Substring(1) + "\n\n");
 
                     switch (UserOutput())
                     {
@@ -528,8 +560,8 @@ namespace FinalCode
                         {
                             Console.Clear();
 
-                            Console.WriteLine("\t\tFrom the camera view, you located a server room around the\n" +
-                                              "\tcorner and made your way there.\n");
+                            Console.WriteLine("\n\n\t\tFrom the camera view, you located a server room around the\n" +
+                                              "\t\tcorner and made your way there.\n");
 
                             Console.WriteLine("\t\t1. Go inside the server room [Lock-picking]\n" + "\t\t2. Deal with the security-cams [Quick hacking]\n");
 
@@ -549,7 +581,9 @@ namespace FinalCode
                                                           "\toverlooks the server room.\n");
 
                                         Console.WriteLine("\t\t1. Now go inside the server room.[Lock-picking]");
-                                        Console.WriteLine("\tYou picked the lock and got inside of the server room.\n\n");
+
+                                        if(UserOutput() == ConsoleKey.D1)
+                                            Console.WriteLine("\tYou picked the lock and got inside of the server room.\n\n");
 
                                         PressToContColored(ConsoleColor.Yellow);
                                         ServerRoom();
@@ -849,7 +883,7 @@ namespace FinalCode
             player1.BartenderFail = true;
 
             ColoredString(ConsoleColor.Yellow, "\tWoah chill man a’ight? Maybe you shouldn’t be talking with me ");
-            Console.WriteLine("*throws\n" +
+            Console.Write("*throws\n" +
                               "\ta look to the guards and mumbles*");
             ColoredString(ConsoleColor.Yellow, " ...shit.\n\n\n");
 
@@ -941,7 +975,7 @@ namespace FinalCode
                         {
                             //second option will be available
 
-                            if(!enableBranch)
+                            //if(!enableBranch) [unnecessary? (post-fix)]
                                 ColoredString(ConsoleColor.Yellow, "\tYou know, same shit different day, nothing exciting nowadays.\n\n");
                             //options go:
 
@@ -1003,7 +1037,7 @@ namespace FinalCode
                                             {
                                                 Console.Clear();
 
-                                                Console.WriteLine("\t\t\tWhere do you want to go?" + "\t\t1.  Go upstairs\n");
+                                                Console.WriteLine("\t\t\tWhere do you want to go?\n\n" + "\t\t1.  Go upstairs\n");
 
                                                 if (UserOutput() == ConsoleKey.D1)
                                                     CrocodileThirdFloor(); //does not lead to booths bu to 3rd floor.
@@ -1041,7 +1075,7 @@ namespace FinalCode
                                             {
                                                 Console.Clear();
 
-                                                Console.WriteLine("\t\t\tWhere do you want to go?" + "\t\t1.  Go to the booths\n" + "\t\t2. Go upstairs\n");
+                                                Console.WriteLine("\t\t\tWhere do you want to go?\n\n" + "\t\t1.  Go to the booths\n" + "\t\t2. Go upstairs\n");
 
                                                 switch(UserOutput())
                                                 {
@@ -1125,7 +1159,7 @@ namespace FinalCode
             "\t\t   $$$$$R  d$b    M$$$$$$$$$$$$$$ \n" +
             "\t\t   $$$$$r  $$$$$$   9$$$$$$$$$$$$ \n" +
             "\t\t   $$$$#  X$$$$$$$od$$$$$$$$$$$$$ \n" +
-            "\t\t   $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ \n\n");
+            "\t\t   $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ \n\n\n\n");
 
             string option1 = "1. Look for a partner. [Sharp Vision]";
             string option2 = "2. You see an IT guy among the crowd. Go be a flatterer to him. [Intimidation]";
@@ -1680,8 +1714,11 @@ namespace FinalCode
 
             SetWinSize(Console.LargestWindowWidth/2, Console.LargestWindowHeight);
 
-            Console.Write("\n\n\t“... right??? He is totally a loooooser! Anyways babe… Maybe we should check\n" +
-                              "\tupstairs and see what’s u-”. The girl who was talking, who has long blonde hair,\n" +
+            ColoredString(ConsoleColor.Yellow, "\n\n\t“... right??? He is totally a loooooser! Anyways babe… Maybe we should check\n" +
+                              "\tupstairs and see what’s u-”.");
+
+
+                Console.Write(" The girl who was talking, who has long blonde hair,\n" +
                               "\twearing a low-cut black dress, and her friend, a brunette, wearing a crop top\n" +
                               "\tcombined with a skirt, stops when she sees you.");
 
@@ -1716,7 +1753,7 @@ namespace FinalCode
                         {
                             Console.Write("\t*They look puzzled for a second and then the brunette girl\n" + "\tanswers*, ");
 
-                            ColoredString(ConsoleColor.Yellow, "Hahah! Nope, I don’t think so [PLAYERNAME]. Best thing\n" +
+                            ColoredString(ConsoleColor.Yellow, $"Hahah! Nope, I don’t think so {player1.Name}. Best thing\n" +
                                           "\tyou can do is buying us a drink if you want to be a help.");
 
                             Console.Write(" *The\n" + "\tblonde turns to her, quite shocked, and says, ");
@@ -1819,7 +1856,7 @@ namespace FinalCode
                         {
                             Console.Write("\t*They look puzzled for a second and then the brunette girl\n" + "\tanswers*, ");
 
-                            ColoredString(ConsoleColor.Yellow, "Hahah! Nope, I don’t think so [PLAYERNAME]. Best thing\n" +
+                            ColoredString(ConsoleColor.Yellow, $"Hahah! Nope, I don’t think so {player1.Name}. Best thing\n" +
                                           "\tyou can do is buying us a drink if you want to be a help.");
 
                             Console.Write(" *The\n" + "\tblonde turns to her, quite shocked, and says, ");
@@ -2308,7 +2345,7 @@ namespace FinalCode
         {
             AllColorSetter(ConsoleColor.Black, ConsoleColor.White);
 
-            Console.WriteLine("\n\n" +
+            ColoredString(ConsoleColor.Green, "\n\n" +
 "\t             ________________________________________________   \n" +
 "\t            .                                                .  \n" +
 "\t           |    _________________________________________     | \n" +
@@ -2347,6 +2384,7 @@ namespace FinalCode
                                   "\tsitting on the lap of some alternative looking person on the 3rd floor.\n" +
                                   "\tWell, now you know your destination.\n");
 
+                PressToContColored(ConsoleColor.Green);
                 CrocodileThirdFloor();
             }
         }
@@ -2700,8 +2738,10 @@ namespace FinalCode
                                                         Console.WriteLine(" They approved.\n\n");
 
                                                         PressToEndColored(ConsoleColor.Yellow);
+                                                        playedOnce = true;
+                                                        CharacterSelection();
 
-                                                        Environment.Exit(0);
+                                                        //Environment.Exit(0);
 
                                                     }
                                                 }
@@ -2723,6 +2763,7 @@ namespace FinalCode
         //done
         public static void CrocMissionComp()
         {
+            playedOnce = true;
             AllColorSetter(ConsoleColor.Black, ConsoleColor.Green);
             Console.WriteLine("\n\n\t\tYou proceeded to the laptop and installed the malware. As soon as the \n" +
                               "\ttransfer completed, everything started to disappear. A void. Darkness.\n" + "\t1. (...)\n");
@@ -2742,7 +2783,8 @@ namespace FinalCode
 "\t )/'._.'    )/    )/      '.(    )..-.(        )/ ._.'   )/..'      )..-.(   )/   )/ \n\n");
 
                 PressToEndColored(ConsoleColor.Yellow);
-                Environment.Exit(0);
+                CharacterSelection();
+                //Environment.Exit(0);
             }
 
         }
@@ -2750,6 +2792,7 @@ namespace FinalCode
         //done
         public static void BugMissionComp()
         {
+            playedOnce = true;
             AllColorSetter(ConsoleColor.Black, ConsoleColor.Green);
             Console.WriteLine("\n\n\t\tYou installed the malware to the computer. As soon as the transfer\n" +
                               "\tcompleted, everything started to disappear. A void. Darkness.\n" + "\t1. (...)\n");
@@ -2775,7 +2818,8 @@ namespace FinalCode
                 Console.WriteLine("They approved.\n");
 
                 PressToEndColored(ConsoleColor.Yellow);
-                Environment.Exit(0);
+                CharacterSelection();
+                //Environment.Exit(0);
             }
 
         }
@@ -2783,12 +2827,13 @@ namespace FinalCode
         //done
         public static bool TwoFailsGO()
         {
+            playedOnce = true;
             if((player1.FailCount == 2) || ((player1.FailCount == 1) && player1.CompGuyFail == true) || ((player1.FailCount == 1) && player1.BoothsFail == true) || (player1.BoothsFail == true && player1.CompGuyFail == true))
             {
                 //could need some editing.
                 AllColorSetter(ConsoleColor.White, ConsoleColor.DarkRed);
 
-                ColoredString(ConsoleColor.Black, "\t\t“\n\nShit.This one is really a dumb one.Let’s just dispose of it.”");
+                ColoredString(ConsoleColor.Black, "\n\n\t\t“Shit.This one is really a dumb one.Let’s just dispose of it.”");
                 Console.WriteLine(" You are in\n" +
                                  "\tdarkness and are unable to open your eyes. Your senses are going numb slowly. You\n" +
                                  "\tare, probably, dying.\n\n");
@@ -2802,8 +2847,8 @@ namespace FinalCode
 "\t )/'._.'    )/    )/      '.(    )..-.(        )/ ._.'   )/..'      )..-.(   )/   )/ \n");
 
                 PressToEndColored(ConsoleColor.DarkRed);
-
-                Environment.Exit(0);
+                CharacterSelection();
+                //Environment.Exit(0);
 
                 //return true;
             }
@@ -2814,6 +2859,7 @@ namespace FinalCode
         //done
         public static void ImmGO()
         {
+            playedOnce = true;
             AllColorSetter(ConsoleColor.White, ConsoleColor.DarkRed);
 
             Console.WriteLine("\n\n\tThat was sloppy. You got caught. Security barged in and executed you. But even\n" +
@@ -2830,8 +2876,8 @@ namespace FinalCode
 "\t )/'._.'    )/    )/      '.(    )..-.(        )/ ._.'   )/..'      )..-.(   )/   )/ \n");
 
             PressToEndColored(ConsoleColor.DarkRed);
-
-            Environment.Exit(0);
+            CharacterSelection();
+            //Environment.Exit(0);
         }
 
         //properties...

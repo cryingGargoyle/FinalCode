@@ -18,6 +18,7 @@ namespace FinalCode
         private bool freshmenConversed;
         private bool compGuyFail;
         private bool laurenceConversed;
+        
 
         //private bool freshmenToBooths;
         //private bool laurenceToBooths;
@@ -52,10 +53,12 @@ namespace FinalCode
             compGuyFail = false;
             laurenceConversed = false;
             beenToDanceFloor = false;
+            
 
             //freshmenToBooths = false;
             //laurenceToBooths = false;
         }
+
 
         public bool LaurenceConversed
         {
