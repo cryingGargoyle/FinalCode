@@ -1008,7 +1008,7 @@ namespace FinalCode
                                             {
                                                 Console.Clear();
 
-                                                ColoredString(ConsoleColor.Yellow, "\tHmm, well a small gossip wouldn’t do any harm\n" +
+                                                ColoredString(ConsoleColor.Yellow, "\n\n\tHmm, well a small gossip wouldn’t do any harm\n" +
                                                                                    "\tI s'pose. I heard our dancer Chelsea has some\n" +
                                                                                    "\tproblems but I don’t really know what it's about.\n\n");
                                                 Console.WriteLine("\t\t1. Huh, that’s interesting. She’s one of the\n" + "\t\tbest, what could’ve happened?\n");
@@ -1037,7 +1037,7 @@ namespace FinalCode
                                             {
                                                 Console.Clear();
 
-                                                Console.WriteLine("\t\t\tWhere do you want to go?\n\n" + "\t\t1.  Go upstairs\n");
+                                                Console.WriteLine("\n\n\t\t\tWhere do you want to go?\n\n" + "\t\t1.  Go upstairs\n");
 
                                                 if (UserOutput() == ConsoleKey.D1)
                                                     CrocodileThirdFloor(); //does not lead to booths bu to 3rd floor.
@@ -1760,8 +1760,13 @@ namespace FinalCode
 
                             ColoredString(ConsoleColor.Yellow, "“Erica!!!”*\n\n");
 
-                            Console.WriteLine("\t\t1. Deal! *you ask two more of your drink*, but come on, at\n" +
+                            Console.Write("\t\t1. Deal! *you ask two more of your drink*, but come on, at\n" +
                                               "\t\tleast fill me in about what happened?\n" + "\t\t2. Hey I’m serious, just let me know and I go handle it.\n");
+
+                            if (!player1.BoothsFail)
+                                Console.Write("\t\t3.Only if you promise to spice up this conversation later on… [Seduction]");
+
+                            Console.WriteLine();
 
                             switch (UserOutput())
                             {
@@ -1784,11 +1789,6 @@ namespace FinalCode
                                                           "\t\t2.Aren’t you the one who was talking about going\n" +
                                                           "\t\tupstairs? Let’s go there instead!\n");
 
-                                        if (!player1.BoothsFail)
-                                            Console.Write("\t\t3.Only if you promise to spice up this conversation later on… [Seduction]");
-
-                                        Console.WriteLine();
-
                                         switch (UserOutput())
                                         {
                                             case ConsoleKey.D1:
@@ -1802,59 +1802,6 @@ namespace FinalCode
                                                     CrocodileThirdFloor();
                                                 }
                                                 break;
-                                            case ConsoleKey.D3:
-                                                {
-                                                    if (!player1.BoothsFail)
-                                                    {
-                                                        AllColorSetter(ConsoleColor.Black, ConsoleColor.DarkRed);
-
-                                                        Console.Write("\t*Erica turns to the blonde and they giggle to each other*, ");
-                                                        ColoredString(ConsoleColor.Magenta, "Oh, we most definitely will...\n");
-                                                        Console.WriteLine("\tAlthough conversation started more friendly than\n" +
-                                                                          "\tflirty, tables turned around quickly and you find\n" +
-                                                                          "\tyourself in one of the private booths. As the girls\n" +
-                                                                          "\ttravel through your neck with their radiant lips under\n" +
-                                                                          "\tthe dim light of the room, you feel a sense of ecstasy.\n" +
-                                                                          "\tBut it is no time to give up yourself to primal urges of\n" +
-                                                                          "\thuman condition. Your eyes catch a view between the\n" +
-                                                                          "\tfingers of Blake and Erica who caresses your face.\n");
-
-                                                        Console.WriteLine("\t\t1.  Look more carefully [Sharp Vision]\n");
-
-                                                        if (UserOutput() == ConsoleKey.D1)
-                                                        {
-                                                            Console.WriteLine("\tFrom the door gap, you see a security guard harassing\n" +
-                                                                              "\ta dancer. But before you could even do anything, he left\n" +
-                                                                              "\tand the dancer threw herself to a couch.\n\n" + "\t\t1. That was truly magical. Thanks for the fun time\n" +
-                                                                              "\t\tgirls! *exit the private booth*\n");
-                                                            if (UserOutput() == ConsoleKey.D1)
-                                                                Booths();
-                                                        }
-                                                        else
-                                                        {
-                                                            bool wrongAnswer = true;
-                                                            ConsoleKey input;
-
-                                                            do
-                                                            {
-                                                                input = UserOutput();
-
-                                                                if ((input == ConsoleKey.D1) || (input == ConsoleKey.D2))
-                                                                {
-                                                                    wrongAnswer = false;
-
-                                                                    if (input == ConsoleKey.D1)
-                                                                        goto case ConsoleKey.D1;
-                                                                    else
-                                                                        goto case ConsoleKey.D2;
-                                                                }
-                                                            } while (wrongAnswer);
-
-                                                        }
-
-                                                    }
-                                                    break;
-                                                }
                                         }
                                     }
                                     break;
@@ -1881,6 +1828,61 @@ namespace FinalCode
                                             //returning to the bar, talking to freshmen is disabled now
                                             TheBar();
                                         }
+                                    }
+                                    break;
+                                case ConsoleKey.D3:
+                                    {
+
+                                        if (!player1.BoothsFail)
+                                        {
+                                            AllColorSetter(ConsoleColor.Black, ConsoleColor.DarkRed);
+
+                                            Console.WriteLine("\n\n\t*Erica turns to the blonde and they giggle to each other*, ");
+                                            ColoredString(ConsoleColor.Magenta, "\tOh, we most definitely will...\n");
+                                            Console.WriteLine("\tAlthough conversation started more friendly than\n" +
+                                                              "\tflirty, tables turned around quickly and you find\n" +
+                                                              "\tyourself in one of the private booths. As the girls\n" +
+                                                              "\ttravel through your neck with their radiant lips under\n" +
+                                                              "\tthe dim light of the room, you feel a sense of ecstasy.\n" +
+                                                              "\tBut it is no time to give up yourself to primal urges of\n" +
+                                                              "\thuman condition. Your eyes catch a view between the\n" +
+                                                              "\tfingers of Blake and Erica who caresses your face.\n");
+
+                                            Console.WriteLine("\t\t1.  Look more carefully [Sharp Vision]\n");
+
+                                            if (UserOutput() == ConsoleKey.D1)
+                                            {
+                                                Console.WriteLine("\tFrom the door gap, you see a security guard harassing\n" +
+                                                                  "\ta dancer. But before you could even do anything, he left\n" +
+                                                                  "\tand the dancer threw herself to a couch.\n\n" + "\t\t1. That was truly magical. Thanks for the fun time\n" +
+                                                                  "\t\tgirls! *exit the private booth*\n");
+                                                if (UserOutput() == ConsoleKey.D1)
+                                                    Booths();
+                                            }
+                                            else
+                                            {
+                                                bool wrongAnswer = true;
+                                                ConsoleKey input;
+
+                                                do
+                                                {
+                                                    input = UserOutput();
+
+                                                    if ((input == ConsoleKey.D1) || (input == ConsoleKey.D2))
+                                                    {
+                                                        wrongAnswer = false;
+
+                                                        if (input == ConsoleKey.D1)
+                                                            goto case ConsoleKey.D1;
+                                                        else
+                                                            goto case ConsoleKey.D2;
+                                                    }
+                                                } while (wrongAnswer);
+
+                                            }
+
+                                        }
+
                                     }
                                     break;
                             }
@@ -1979,7 +1981,18 @@ namespace FinalCode
                                                     //"fail" screen
                                                     AllColorSetter(ConsoleColor.White, ConsoleColor.Red);
 
-                                                    Console.WriteLine("\n\n\tYou should have behaved more accordingly… Now you feel the security will be\n" + "\tmore careful with you.\n\n");
+                                            Console.WriteLine("\n\n" +
+                                                 "\t\t  ██████  ▒█████      ██▀███   █    ██ ▓█████▄ ▓█████\n" +
+                                                 "\t\t▒██    ▒ ▒██▒  ██▒   ▓██ ▒ ██▒ ██  ▓██▒▒██▀ ██ ▓█   ▀\n" +
+                                                 "\t\t░ ▓██▄   ▒██░  ██▒   ▓██ ░▄█ ▒▓██  ▒██░░██   █ ▒███  \n" +
+                                                 "\t\t  ▒   ██▒▒██   ██░   ▒██▀▀█▄  ▓▓█  ░██░░▓█▄    ▒▓█  ▄\n" +
+                                                 "\t\t▒██████▒▒░ ████▓▒░   ░██▓ ▒██▒▒▒█████▓ ░▒████▓ ░▒████▒\n" +
+                                                 "\t\t▒ ▒▓▒ ▒ ░░ ▒░▒░▒░    ░ ▒▓ ░▒▓░░▒▓▒ ▒ ▒  ▒▒▓  ▒ ░░ ▒░ ░\n" +
+                                                 "\t\t░ ░▒  ░ ░  ░ ▒ ▒░      ░▒ ░ ▒░░░▒░ ░ ░  ░ ▒  ▒  ░ ░  ░\n" +
+                                                 "\t\t░  ░  ░  ░ ░ ░ ▒       ░░   ░  ░░░ ░ ░  ░ ░  ░    ░   \n" +
+                                                 "\t\t      ░      ░ ░        ░        ░        ░       ░  ░\n\n");
+
+                                            Console.WriteLine("\n\n\tYou should have behaved more accordingly… Now you feel the security will be\n" + "\tmore careful with you.\n\n");
                                                     PressToContColored(ConsoleColor.Black);
                                                     //returning to the bar, talking to freshmen is disabled now
                                                     TheBar();
@@ -2136,7 +2149,7 @@ namespace FinalCode
                         {
                             Console.Clear();
 
-                            ColoredString(ConsoleColor.Magenta, "\tOh wow, excuse me if I’m being rude but… Why?\n\n");
+                            ColoredString(ConsoleColor.Magenta, "\n\n\tOh wow, excuse me if I’m being rude but… Why?\n\n");
 
                             Console.WriteLine("\t\t1. Let’s say it troubles me to see wonders like you sad. Would\n" +
                                               "\tyou mind giving me some more details about this, perhaps I\n" +
@@ -2500,7 +2513,7 @@ namespace FinalCode
             "\t\t MMMOMMMOMMMMMOMMOOMMMbT8bTSSSSSPd88PdOOOOMMMMOOMMMMMMMMOOMMM \n\n");
 
 
-            Console.WriteLine("\n\nThe dancer guided you about finding him and you followed her guidance. You\t\n" +
+            Console.WriteLine("\n\n\tThe dancer guided you about finding him and you followed her guidance. You\t\n" +
                              "\tfound the Bug on the 3rd floor and as soon as you found him, you realized he is\n" +
                              "\talso the “Technology Manager” of the club, not your usual security guard.\n" +
                              "\tLuckily, the 3rd floor is not as crowded as the main floor so it is easier to hold a\n" +
@@ -2878,7 +2891,7 @@ namespace FinalCode
             if(UserOutput() == ConsoleKey.D1)
             {
                 ColoredString(ConsoleColor.Yellow, "\t“That was a good one. We better work on these dialogues though. What the\n" +
-                                                   "\thell was he doing\n”");
+                                                   "\thell was he doing\n\n”");
 
                 ColoredString(ConsoleColor.Yellow,
 "\t ▄▀▀▄ ▄▀▄  ▄▀▀▄    ▄▀▀▄  ▄▀▀█▄   ▄▀▀▄ ▄▄   ▄▀▀█▄   ▄▀▀▄ ▄▄   ▄▀▀█▄   ▄▀▀▄ ▄▄   ▄▀▀█▄  \n" +
@@ -2886,9 +2899,9 @@ namespace FinalCode
 "\t   █    █    █        █   █▄▄▄█    █▄▄▄█    █▄▄▄█    █▄▄▄█    █▄▄▄█    █▄▄▄█    █▄▄▄█  \n" +
 "\t  █    █    █   ▄    █   ▄▀   █    █   █   ▄▀   █    █   █   ▄▀   █    █   █   ▄▀   █  \n" +
 "\t▄▀   ▄▀      ▀▄▀ ▀▄ ▄▀  █   ▄▀    ▄▀  ▄▀  █   ▄▀    ▄▀  ▄▀  █   ▄▀    ▄▀  ▄▀  █   ▄▀   \n" +
-"\t█    █             ▀             █   █             █   █             █   █           \n"  );
+"\t█    █             ▀             █   █             █   █             █   █           \n\n"  );
 
-                Console.Write("You wake up on a bench in a laboratory.\n" +
+                Console.Write("\tYou wake up on a bench in a laboratory.\n" +
                               "\tSome men are laughing at something. Another man with an expensive\n" +
                               "\tsuit nods. ");
                 ColoredString(ConsoleColor.Yellow, "“Provide equipment. I want this job to be done. Tonight.”\n" + "\t“Yes, sir!”");
