@@ -1864,8 +1864,9 @@ namespace FinalCode
                             ColoredString(ConsoleColor.Yellow, "“Erica!!!”*\n\n");
 
                             Console.WriteLine("\t\t1. Deal! *you ask two more of your drink*, but come on, at\n" +
-                                              "\t\tleast fill me in about what happened?\n" + "\t\t2. Hey I’m serious, just let me know and I go handle it.\n" + 
-                                              "\t\t3. Only if you promise to spice up this conversation later on… [Seduction]\n");
+                                              "\t\tleast fill me in about what happened?\n" + "\t\t2. Hey I’m serious, just let me know and I go handle it.\n");
+                             
+                            ColoredString(ConsoleColor.Red ,"\t\t3. Only if you promise to spice up this conversation later on… [Seduction]\n\n");
 
                             switch(UserOutput())
                             {
@@ -1929,7 +1930,26 @@ namespace FinalCode
                                     break;
                                 case ConsoleKey.D3:
                                     {
-                                        AllColorSetter(ConsoleColor.Black, ConsoleColor.DarkRed);
+
+                                        bool wrongAnswer = true;
+                                        ConsoleKey input;
+
+                                        do
+                                        {
+                                            input = UserOutput();
+
+                                            if ((input == ConsoleKey.D1) || (input == ConsoleKey.D2))
+                                            {
+                                                wrongAnswer = false;
+
+                                                if (input == ConsoleKey.D1)
+                                                    goto case ConsoleKey.D1;
+                                                else
+                                                    goto case ConsoleKey.D2;
+                                            }
+                                        } while (wrongAnswer);
+
+                                        /*AllColorSetter(ConsoleColor.Black, ConsoleColor.DarkRed);
 
                                         Console.Write("\t*Erica turns to the blonde and they giggle to each other*, ");
                                         ColoredString(ConsoleColor.Magenta, "Oh, we most definitely will...\n");
@@ -1952,7 +1972,7 @@ namespace FinalCode
                                                               "\t\tgirls! *exit the private booth*\n");
                                             if (UserOutput() == ConsoleKey.D1)
                                                 Booths();
-                                        }
+                                        }*/
                                     }
                                     break;
                             }
@@ -2631,7 +2651,7 @@ namespace FinalCode
                             {
                                 Console.Clear();
 
-                                Console.WriteLine("\tBecause you look so harmless and “normal”, no one ever\n" +
+                                Console.WriteLine("\n\n\tBecause you look so harmless and “normal”, no one ever\n" +
                                                   "\tsuspects you of something like that. He looks around and\n" +
                                                   "\tasks around and eventually leaves for the main floor. His\n" +
                                                   "\tcomputer is yours.\n" + "\t\t1. Install the malware\n");
@@ -2770,8 +2790,8 @@ namespace FinalCode
 
             if (UserOutput() == ConsoleKey.D1)
             {
-                Console.Write("\n\t\tYou wake up on a bench in a laboratory. A man with an expensive\n" +"\tsuit nods. ");
-                ColoredString(ConsoleColor.Yellow, "“Provide equipment. I want this job to be done. Tonight.”\n" + " “Yes, sir!”");
+                Console.Write("\n\t\tYou wake up on a bench in a laboratory. A man with an expensive\n" +"\t\tsuit nods. ");
+                ColoredString(ConsoleColor.Yellow, "“Provide equipment. I want this job to be done. Tonight.”\n" + "\t“Yes, sir!”");
                 Console.WriteLine("They approved.\n\n");
 
                 ColoredString(ConsoleColor.Green, 
@@ -2795,7 +2815,7 @@ namespace FinalCode
             playedOnce = true;
             AllColorSetter(ConsoleColor.Black, ConsoleColor.Green);
             Console.WriteLine("\n\n\t\tYou installed the malware to the computer. As soon as the transfer\n" +
-                              "\tcompleted, everything started to disappear. A void. Darkness.\n" + "\t1. (...)\n");
+                              "\tcompleted, everything started to disappear. A void. Darkness.\n" + "\t\t1. (...)\n");
 
             if(UserOutput() == ConsoleKey.D1)
             {
@@ -2804,17 +2824,16 @@ namespace FinalCode
 
                 ColoredString(ConsoleColor.Yellow,
 "\t ▄▀▀▄ ▄▀▄  ▄▀▀▄    ▄▀▀▄  ▄▀▀█▄   ▄▀▀▄ ▄▄   ▄▀▀█▄   ▄▀▀▄ ▄▄   ▄▀▀█▄   ▄▀▀▄ ▄▄   ▄▀▀█▄  \n" +
-"\t█  █ ▀  █ █   █    ▐  █ ▐ ▄▀ ▀▄ █  █   ▄▀ ▐ ▄▀ ▀▄ █  █   ▄▀ ▐ ▄▀ ▀▄ █  █   ▄▀ ▐ ▄▀ ▀▄  \n" +
-"\t▐  █    █ ▐  █        █   █▄▄▄█ ▐  █▄▄▄█    █▄▄▄█ ▐  █▄▄▄█    █▄▄▄█ ▐  █▄▄▄█    █▄▄▄█  \n" +
+"\t█  █ ▀  █ █   █       █   ▄▀ ▀▄ █  █   ▄▀   ▄▀ ▀▄ █  █   ▄▀   ▄▀ ▀▄ █  █   ▄▀   ▄▀ ▀▄  \n" +
+"\t   █    █    █        █   █▄▄▄█    █▄▄▄█    █▄▄▄█    █▄▄▄█    █▄▄▄█    █▄▄▄█    █▄▄▄█  \n" +
 "\t  █    █    █   ▄    █   ▄▀   █    █   █   ▄▀   █    █   █   ▄▀   █    █   █   ▄▀   █  \n" +
 "\t▄▀   ▄▀      ▀▄▀ ▀▄ ▄▀  █   ▄▀    ▄▀  ▄▀  █   ▄▀    ▄▀  ▄▀  █   ▄▀    ▄▀  ▄▀  █   ▄▀   \n" +
-"\t█    █             ▀    ▐   ▐    █   █    ▐   ▐    █   █    ▐   ▐    █   █    ▐   ▐    \n" +
-"\t▐    ▐                           ▐   ▐             ▐   ▐             ▐   ▐               \n\n" );
+"\t█    █             ▀             █   █             █   █             █   █           \n"  );
 
                 Console.Write("You wake up on a bench in a laboratory.\n" +
                               "\tSome men are laughing at something. Another man with an expensive\n" +
                               "\tsuit nods. ");
-                ColoredString(ConsoleColor.Yellow, "“Provide equipment. I want this job to be done. Tonight.”\n" + " “Yes, sir!”");
+                ColoredString(ConsoleColor.Yellow, "“Provide equipment. I want this job to be done. Tonight.”\n" + "\t“Yes, sir!”");
                 Console.WriteLine("They approved.\n");
 
                 PressToEndColored(ConsoleColor.Yellow);
