@@ -170,7 +170,7 @@ namespace FinalCode
             AllColorSetter(ConsoleColor.Black, ConsoleColor.DarkRed);
        
             //If booths part has been failed then player must return here and have the option of the dance floor only.
-            if (!(player1.BoothsFail = false))
+            if (!player1.BoothsFail)
             {
 
                 Console.WriteLine("\n\n\t\tIn the midst of a pile of shit, the building of Club Giraffe is rising and\n" +
