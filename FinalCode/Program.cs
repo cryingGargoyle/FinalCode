@@ -1727,7 +1727,7 @@ namespace FinalCode
             Console.Write($"\t\t1. Hey… I was just looking around for a company, I’m {player1.Name}.\n" +
                               $"\t\t2. Someone gave you guys trouble? Name’s {player1.Name} by the way.\n"); 
 
-            if(player1.BoothsFail && player1.getSelectedChar().containsSkill(Skills.Seduction))
+            if(player1.getSelectedChar().containsSkill(Skills.Seduction))
             {
                 switch (UserOutput())
                 {
@@ -1804,7 +1804,7 @@ namespace FinalCode
                                                 break;
                                             case ConsoleKey.D3:
                                                 {
-                                                    if(!player1.BoothsFail)
+                                                    if (!player1.BoothsFail)
                                                     {
                                                         AllColorSetter(ConsoleColor.Black, ConsoleColor.DarkRed);
 
@@ -1830,30 +1830,31 @@ namespace FinalCode
                                                             if (UserOutput() == ConsoleKey.D1)
                                                                 Booths();
                                                         }
-                                                    else
-                                                    {
-                                                        bool wrongAnswer = true;
-                                                        ConsoleKey input;
-
-                                                        do
+                                                        else
                                                         {
-                                                            input = UserOutput();
+                                                            bool wrongAnswer = true;
+                                                            ConsoleKey input;
 
-                                                            if ((input == ConsoleKey.D1) || (input == ConsoleKey.D2))
+                                                            do
                                                             {
-                                                                wrongAnswer = false;
+                                                                input = UserOutput();
 
-                                                                if (input == ConsoleKey.D1)
-                                                                    goto case ConsoleKey.D1;
-                                                                else
-                                                                    goto case ConsoleKey.D2;
-                                                            }
-                                                        } while (wrongAnswer);
+                                                                if ((input == ConsoleKey.D1) || (input == ConsoleKey.D2))
+                                                                {
+                                                                    wrongAnswer = false;
+
+                                                                    if (input == ConsoleKey.D1)
+                                                                        goto case ConsoleKey.D1;
+                                                                    else
+                                                                        goto case ConsoleKey.D2;
+                                                                }
+                                                            } while (wrongAnswer);
+
+                                                        }
 
                                                     }
-
+                                                    break;
                                                 }
-                                                break;
                                         }
                                     }
                                     break;
